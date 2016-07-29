@@ -2,50 +2,31 @@ package apkmarvel.androidhttpurlconnection;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.util.HashMap;
-
-import javax.net.ssl.HttpsURLConnection;
-
-import apkmarvel.androidhttpurlconnection.utils.UtilNetConnection;
+import apkmarvel.androidhttpurlconnection.webservice.WebServiceRequest;
+import apkmarvel.androidhttpurlconnection.webservice.command.PostCommand;
+import apkmarvel.androidhttpurlconnection.webservice.model.WebServiceInfo;
 
 public class MainActivity extends AppCompatActivity {
+    private PostCommand postCommand;
     public static final String TAG = MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void post(View v) {
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    String url="www.sampleurl.com";
-                    HttpURLConnection con = UtilNetConnection.buildConnection(url);
-                    /*add parameter*/
-                    UtilNetConnection.writeParam(con,UtilNetConnection.getPostDataString(getParam()));
-                    int responseCode = con.getResponseCode();
-                    if (responseCode == HttpsURLConnection.HTTP_OK) {
-                     String result= UtilNetConnection.inputStreamToString(con.getInputStream());
-                        Log.e(TAG, result);
-                    }
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+    public void cancel(View v){
+        postCommand.cancel();
     }
-    private HashMap<String, String> getParam() {
-        HashMap<String, String> param = new HashMap<>();
-        param.put("email", "johncarlo_franco@yahoo.com");
-        param.put("source", "mobapps");
-        return param;
+    public void post(View v) {
+        WebServiceInfo webServiceInfo = new WebServiceInfo();
+        String url="http://mcdodev.mobext.ph/app/api/v2/User/reset_password";
+        webServiceInfo.setUrl(url);
+        webServiceInfo.addParam("email", "johncarlo_franco@yahoo.com");
+        webServiceInfo.addParam("source", "mobapps");
+        postCommand = new PostCommand(webServiceInfo);
+        WebServiceRequest webServiceRequest = new WebServiceRequest(postCommand);
+        webServiceRequest.execute();
     }
 }

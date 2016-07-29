@@ -1,4 +1,4 @@
-package apkmarvel.androidhttpurlconnection.utils;
+package apkmarvel.androidhttpurlconnection.webservice;
 
 import android.util.Log;
 
