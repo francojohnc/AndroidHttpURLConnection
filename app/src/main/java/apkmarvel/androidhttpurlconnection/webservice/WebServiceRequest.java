@@ -22,7 +22,7 @@ public class WebServiceRequest extends NetworkTask<Void,Void,WebResponse>{
 	}
 
 	@Override
-	public void setOnServiceListener(OnServiceListener listener) {
+	public void setOnServiceListener(OnServiceListener onServiceListener) {
 		this.onServiceListener=onServiceListener;
 	}
 }

@@ -1,8 +1,6 @@
 package apkmarvel.androidhttpurlconnection.webservice.command;
 
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
@@ -29,7 +27,6 @@ public class PostCommand implements WebCommand {
 			/*set data*/
 			response.setResponseCode(responseCode);
 			response.setStringResponse(result);
-			Log.e("PostCommand", result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
