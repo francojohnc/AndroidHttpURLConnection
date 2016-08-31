@@ -14,6 +14,11 @@
       android:layout_height="wrap_content" />
   <Button
       android:layout_width="wrap_content"
+      android:text="get"
+      android:onClick="get"
+      android:layout_height="wrap_content" />
+  <Button
+      android:layout_width="wrap_content"
       android:text="cancel"
       android:onClick="cancel"
       android:layout_height="wrap_content" />

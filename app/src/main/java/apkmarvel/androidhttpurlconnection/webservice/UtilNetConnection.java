@@ -20,12 +20,22 @@ import java.util.Map;
  */
 public class UtilNetConnection {
     public static final String TAG = UtilNetConnection.class.getSimpleName();
-    public static HttpURLConnection buildConnection(String url) throws IOException {
+    /*request method*/
+    public static final String POST ="POST";
+    /*use for post*/
+    public static HttpURLConnection buildConnection(String url,String requestMethod) throws IOException {
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
        /*set request*/
-        con.setRequestMethod("POST");
+        con.setRequestMethod(requestMethod);
         con.setRequestProperty("Accept-Language", "UTF-8");
         con.setDoOutput(true);
+        return con;
+    }
+    /*use for get*/
+    public static HttpURLConnection buildConnection(String url) throws IOException {
+        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+        /*set request*/
+        con.setRequestProperty("Accept-Language", "UTF-8");
         return con;
     }
     /*HashMap to post parameter data*/

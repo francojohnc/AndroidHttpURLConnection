@@ -19,7 +19,9 @@ public class PostCommand implements WebCommand {
 	public WebResponse execute() {
 		WebResponse response = new WebResponse();
 		try {
-			 con = UtilNetConnection.buildConnection(webInfo.getUrl());
+			/*build connection*/
+			con = UtilNetConnection.buildConnection(webInfo.getUrl(),UtilNetConnection.POST);
+			/*add param*/
 			UtilNetConnection.writeParam(con,UtilNetConnection.getPostDataString(webInfo.getParam()));
 			/*get data*/
 			int responseCode = con.getResponseCode();
